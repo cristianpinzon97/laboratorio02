@@ -1,0 +1,12 @@
+1. Posibles condiciones de carrera.
+    * N serpientes intentan acceder a la misma celda con un item.
+    * Cuando el juego intenta generar items en la mismas celdas que estan ocupando la cabeza de N serpientes.
+2. Uso inadecuado de colecciones, considerando su manejo concurrente (para esto, aumente la velocidad del juego y ejecútelo varias veces hasta que se genere un error).
+    * Al momento de consultar las celdas  de la coleccion "gameboard" el juego esta permitiendo que N hilos accedan a ellas al mismo tiempo
+    * Las colecciones de los items del juego  en la clase "Board" estan siendo accedidas por N hilos al  mismo tiempo.
+3. Uso innecesario de esperas activas.
+    * Se busca que alguna celda este vacia, pero puede que en los lugares que busque se encuentre pasando alguna de las N serpientes.
+RESPUESTAS REGIONES CRITICAS
+    * N serpientes intentan acceder a la misma celda que contiene un item.
+        RTA:// Se sincronizo la celda especifica ,para asi garantizar que cada serpiente accede a la celda exclusiva e individualmente.
+    * Cuando el juego intenta generar items en la mismas celdas que estan ocupando la cabeza de N serpientes
