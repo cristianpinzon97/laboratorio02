@@ -46,7 +46,7 @@ public class SnakeApp {
     int nr_selected = 0;
     Thread[] thread = new Thread[MAX_THREADS];
     private JButton Iniciar, Pausar, Reanudar;
-    public String estado, mejor = "Mejor(s): ", peor = "Peor Serpiente : ";
+    public String estado="", mejor = "Mejor(s): ", peor = "Peor Serpiente : ";
     boolean primera = true;
     public static Object o = new Object();
     private JTextArea j1;
@@ -64,13 +64,6 @@ public class SnakeApp {
         frame.setLocation(dimension.width / 2 - frame.getWidth() / 2,
                 dimension.height / 2 - frame.getHeight() / 2);
         board = new Board();
-
-        for (int i = 0; i != MAX_THREADS; i++) {
-            snakes[i] = new Snake(i + 1, spawn[i], i + 1, this.o);
-            snakes[i].addObserver(board);
-            thread[i] = new Thread(snakes[i]);
-        }
-
         frame.add(board, BorderLayout.CENTER);
         JPanel info = new JPanel(new GridLayout(1, 2));
 
@@ -129,17 +122,7 @@ public class SnakeApp {
             thread[i] = new Thread(snakes[i]);
         }
         
-        while (true) {
-            int x = 0;
-            for (int i = 0; i != MAX_THREADS; i++) {
-                if (snakes[i].isSnakeEnd() == true) {
-                    x++;
-                }
-            }
-            if (x == MAX_THREADS) {
-                break;
-            }
-        }
+        
 
         System.out.println("Thread (snake) status:");
         for (int i = 0; i != MAX_THREADS; i++) {
